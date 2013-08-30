@@ -1,3 +1,9 @@
 <h1>Create User</h1>
 
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <%= error %><br>
+  <% end %>
+<% end %>
+<br>
 <%= render "form", :user => @user %>

@@ -3,16 +3,23 @@ class SessionsController < ApplicationController
   before_filter :require_current_user!, :only => [:destroy]
 
   def create
-    user = User.find_by_credentials(
+    @user = User.find_by_credentials(
       params[:user][:username],
       params[:user][:password]
     )
 
-    if user.nil?
-      render :json => "Credentials were wrong"
+    p "I AM IN HERE"
+
+    if @user.nil?
+      flash[:errors] = "Credentials were wrong"
+      @user = User.new # To avoid nil.username error on sign in page.
+      render 'new'
     else
-      self.current_user = user
-      redirect_to user_url(user)
+      self.current_user = @user
+      respond_to do |format|
+        format.html { redirect_to root_url } # Entry point into Backbones app
+        format.json { render :json => @user }
+      end
     end
   end
 
@@ -22,5 +29,6 @@ class SessionsController < ApplicationController
   end
 
   def new
+    @user = User.new
   end
 end

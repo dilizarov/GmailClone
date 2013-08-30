@@ -7,9 +7,13 @@ class UsersController < ApplicationController
 
     if @user.save
       self.current_user = @user
-      redirect_to user_url(@user)
+      respond_to do |format|
+        format.html { redirect_to root_url } # Entry point into Backbones app
+        format.json { render :json => @user }
+      end
     else
-      render :json => @user.errors.full_messages
+      flash.now[:errors] = @user.errors.full_messages
+      render 'new'
     end
   end
 
