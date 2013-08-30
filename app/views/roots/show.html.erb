@@ -1,7 +1,10 @@
 Welcome to Gmail!
 
+<div class="content">
+
 <script type="application/javascript">
   $(document).ready(function(){
-    Gmail.initialize();
+    var currentUser = <%= current_user.to_json.html_safe %>
+    Gmail.initialize($('.content'), currentUser);
   });
 </script>

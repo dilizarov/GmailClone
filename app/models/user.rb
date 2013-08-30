@@ -2,6 +2,14 @@ class User < ActiveRecord::Base
   attr_accessible :username, :password
   attr_reader :password
 
+  has_many :sent_emails,
+  :class_name => "Email",
+  :foreign_key => :sender_id
+  
+  has_many :received_emails,
+  :class_name => "Email",
+  :foreign_key => :recipient_id
+
   validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates :password, :length => { :minimum => 6, :allow_nil => true }
   validates :session_token, :presence => true

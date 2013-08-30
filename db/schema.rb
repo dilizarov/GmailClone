@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130830092553) do
+ActiveRecord::Schema.define(:version => 20130830172831) do
+
+  create_table "emails", :force => true do |t|
+    t.integer  "recipient_id"
+    t.integer  "sender_id"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "parent_email_id"
+    t.boolean  "starred"
+    t.boolean  "read"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "emails", ["parent_email_id"], :name => "index_emails_on_parent_email_id"
+  add_index "emails", ["recipient_id"], :name => "index_emails_on_recipient_id"
+  add_index "emails", ["sender_id"], :name => "index_emails_on_sender_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"
