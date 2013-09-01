@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     )
 
     if @user.nil?
-      flash[:errors] = ["Credentials were wrong"]
+      flash.now[:errors] = ["Credentials were wrong"]
       @user = User.new # To avoid nil.username error on sign in page.
       render 'new'
     else
