@@ -29,3 +29,4 @@ gem 'ejs'
 gem "simple-rss"
 require 'open-uri'
 gem 'rabl'
+gem "rest-client"
