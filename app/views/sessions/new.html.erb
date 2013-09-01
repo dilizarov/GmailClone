@@ -2,7 +2,11 @@ new to Gmail? <%= button_to "Create an account", new_user_url, { :method => :get
 
 <br><br><h1>Sign In</h1>
 
-<%= flash.now[:errors][0] %>
+<% if flash.now[:errors] %>
+  <% flash.now[:errors].each do |error| %>
+    <%= error %>
+  <% end %>
+<% end %>
 
 <form action="<%= session_url %>" method="post">
   <input
