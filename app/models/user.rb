@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :password
+  attr_accessible :email, :password
   attr_reader :password
 
   has_many :sent_emails,
   :class_name => "Email",
-  :foreign_key => :sender_id
+  :foreign_key => :sender_address,
+  :primary_key => :email
   
   has_many :received_emails,
   :class_name => "Email",
@@ -13,13 +14,15 @@ class User < ActiveRecord::Base
   validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates :password, :length => { :minimum => 6, :allow_nil => true }
   validates :session_token, :presence => true
-  validates :username, :presence => true
-  validates :username, :uniqueness => true
+  validates :email, :presence => true
+  validates :email, :uniqueness => true
+  validates_format_of :email, :with => /\A(\d|[a-zA-Z])+(\d|[a-zA-Z]|\.)*@gmaily.com/,
+  :message => "The first character of your username should be a letter (a-z) or number."
 
   after_initialize :ensure_session_token
 
-  def self.find_by_credentials(username, password)
-    user = User.find_by_username(username)
+  def self.find_by_credentials(email, password)
+    user = User.find_by_email(email)
 
     return nil if user.nil?
 

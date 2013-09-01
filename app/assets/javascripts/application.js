@@ -16,6 +16,7 @@
 //= require underscore
 //= require backbone
 //= require gmail
+//= require extendData
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

@@ -1,0 +1,8 @@
+<a href="#/">Back!</a>
+
+<h2><%= email.get('title') %></h2>
+<br>
+<%= email.get('sender_address') %> <br>
+to <%= Gmail.currentUser.email %>
+<br><br>
+<%= email.get('content') %>

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_no_current_user!, :only => [:create, :new]
 
   def create
+    params[:user][:email] += '@gmaily.com'
     @user = User.new(params[:user])
 
     if @user.save
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.email = "@gmaily.com"
     render 'new'
   end
 
@@ -26,7 +28,7 @@ class UsersController < ApplicationController
     if params.include?(:id)
       @user = User.find(params[:id])
     else
-      redirect_to user_url(current_user)
+      render :json => "That user doesn't exist!", :status => 422
     end
   end
 end

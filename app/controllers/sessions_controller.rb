@@ -3,12 +3,14 @@ class SessionsController < ApplicationController
   before_filter :require_current_user!, :only => [:destroy]
 
   def create
+    unless params[:user][:email].end_with?("@gmaily.com")
+      params[:user][:email] += "@gmaily.com"
+    end
+    
     @user = User.find_by_credentials(
-      params[:user][:username],
+      params[:user][:email],
       params[:user][:password]
     )
-
-    p "I AM IN HERE"
 
     if @user.nil?
       flash[:errors] = "Credentials were wrong"
