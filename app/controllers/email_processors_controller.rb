@@ -1,4 +1,4 @@
-class EmailProcessorsController < ApplicationController
+class EmailProcessorController < ApplicationController
 
   def create
     
@@ -10,6 +10,8 @@ class EmailProcessorsController < ApplicationController
     Email.create(recipient_id: @user, sender_address: params[:from], title: params[:subject],
                  content: params['body-mime'], starred: false,
                  read: false, parent_email_id: -1);
+                 
+    head :ok
   end
 
 end
