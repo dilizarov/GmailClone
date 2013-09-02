@@ -6,6 +6,7 @@ class EmailProcessorController < ApplicationController
     @user = @user[0...-24]
     @user += '@gmaily.com'
     @user = User.find_by_email(@user);
+    @user = @user.id
     
     Email.create(recipient_id: @user, sender_address: params[:from], title: params[:subject],
                  content: params['body-mime'], starred: false,
