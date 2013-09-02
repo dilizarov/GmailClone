@@ -4,6 +4,7 @@ Gmail::Application.routes.draw do
   
   resource :session, :only => [:create, :destroy, :new]
   resource :root
+  resources :email_processor, :only => [:create]
   
   root :to => "roots#show"
 end

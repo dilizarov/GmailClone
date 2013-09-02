@@ -1,0 +1,2 @@
+module EmailProcessorsHelper
+end
