@@ -4,8 +4,10 @@
   <% currentDate = new Date(email.get('updated_at')) %>
   <% if (Date.sameDays(date, currentDate)) { %>
   <%    timeStamp = (currentDate.getHours() > 11) ? " pm" : " am" %>
-  <%    hour = (currentDate.getHours() === 0) ? 12 : (currentDate.getHours() % 12) %>  
-  <%    currentDate = (hour) + ":" + (currentDate.getMinutes() + 1) + timeStamp %>
+  <%    hour = (currentDate.getHours() === 0) ? 12 : (currentDate.getHours() % 12) %>
+  <%    minutes = currentDate.getMinutes() %>  
+  <%    minutes = (minutes === minutes % 10) ? "0" + (minutes) : minutes %>
+  <%    currentDate = (hour) + ":" + minutes + timeStamp %>
   <% } else { %>
   <%    currentDate = currentDate.getShortMonthName() + " " + currentDate.getDate(); %>
   <% } %>

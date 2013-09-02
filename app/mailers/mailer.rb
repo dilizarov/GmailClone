@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "david@app17850547.mailgun.org"
 
   def user_added
   mail(:to => "dilizarov@gmail.com", :subject => "New friend added")

@@ -12,9 +12,6 @@ class EmailProcessorController < ApplicationController
                  content: params['body-plain'], starred: false,
                  read: false, parent_email_id: -1)
                  
-    Email.create(recipient_id: 1, sender_address: "failure@failure.com", title: "That failed",
-    content: "This is a message telling that it failed!", starred: false, read: false, parent_email_id: -1);             
-                  
     head :ok
   end
 
