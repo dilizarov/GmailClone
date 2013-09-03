@@ -7,9 +7,7 @@ class FoldersController < ApplicationController
   end
   
   def show
-    p params
     @folder = Folder.find(params[:id])
-    p @folder
     @emails = @folder.emails.select { |email| email.recipient_id == current_user.id }
     p @emails
     

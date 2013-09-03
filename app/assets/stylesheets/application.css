@@ -11,3 +11,14 @@
  *= require_self
  *= require_tree .
  */
+
+.folders {
+	float: left;
+	width: 20%;
+	height: 100%;
+}
+
+.content {
+	float: right;
+	width: 75%;
+}

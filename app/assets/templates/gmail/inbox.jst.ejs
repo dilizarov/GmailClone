@@ -1,7 +1,6 @@
 <h2>Emails</h2>
 
 <% emails.each(function (email) { %>
-  <% debugger %>
   <% currentDate = new Date(email.get('updated_at')) %>
   <% if (Date.sameDays(date, currentDate)) { %>
   <%    timeStamp = (currentDate.getHours() > 11) ? " pm" : " am" %>

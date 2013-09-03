@@ -12,6 +12,7 @@ class Email < ActiveRecord::Base
   belongs_to :recipient,
   :class_name => "User"
   
-  belongs_to :folder
-  
+  has_many :folder_emails,
+  :class_name => "FolderEmail"
+  has_many :folders, :through => :folder_emails
 end

@@ -1,7 +1,7 @@
 class EmailsController < ApplicationController
 
   def index
-    @emails = Email.find_all_by_recipient_id(current_user.id);
+    @emails = Email.find_all_by_recipient_id(current_user.id)
     
     render :json => @emails
   end
