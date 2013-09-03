@@ -3,15 +3,15 @@ window.Gmail = {
   Collections: {},
   Views: {},
   Routers: {},
-  initialize: function($rootEl, currentUser) {
+  initialize: function($rootEl, $subEl, currentUser) {
     Gmail.currentUser = currentUser;
-    var emails = new Gmail.Collections.Emails();
-    emails.fetch({
-      success: function(emailData) {
-        new Gmail.Routers.GmailRouter($rootEl, emailData)
+    var folders = new Gmail.Collections.Folders();
+    folders.fetch({
+      success: function(folderData) {
+        new Gmail.Routers.GmailRouter($rootEl, $subEl, folderData)
         Backbone.history.start();
       },
-      error: function(emailData) {
+      error: function(folderData) {
         debugger
       }
     });

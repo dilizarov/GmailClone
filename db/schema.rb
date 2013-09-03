@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831004127) do
+ActiveRecord::Schema.define(:version => 20130902213049) do
 
   create_table "emails", :force => true do |t|
     t.integer  "recipient_id"
@@ -23,11 +23,30 @@ ActiveRecord::Schema.define(:version => 20130831004127) do
     t.boolean  "read"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "folder_id"
   end
 
   add_index "emails", ["parent_email_id"], :name => "index_emails_on_parent_email_id"
   add_index "emails", ["recipient_id"], :name => "index_emails_on_recipient_id"
   add_index "emails", ["sender_address"], :name => "index_emails_on_sender_id"
+
+  create_table "folders", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "folders", ["name"], :name => "index_folders_on_name"
+
+  create_table "user_folders", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "folder_id",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_folders", ["folder_id"], :name => "index_user_folders_on_folder_id"
+  add_index "user_folders", ["user_id"], :name => "index_user_folders_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

@@ -1,0 +1,18 @@
+<h2>Emails</h2>
+
+<% emails.each(function (email) { %>
+  <% debugger %>
+  <% currentDate = new Date(email.get('updated_at')) %>
+  <% if (Date.sameDays(date, currentDate)) { %>
+  <%    timeStamp = (currentDate.getHours() > 11) ? " pm" : " am" %>
+  <%    hour = (currentDate.getHours() === 0) ? 12 : (currentDate.getHours() % 12) %>
+  <%    minutes = currentDate.getMinutes() %>  
+  <%    minutes = (minutes === minutes % 10) ? "0" + (minutes) : minutes %>
+  <%    currentDate = (hour) + ":" + minutes + timeStamp %>
+  <% } else { %>
+  <%    currentDate = currentDate.getShortMonthName() + " " + currentDate.getDate(); %>
+  <% } %>
+  <li class="email"><a href="#/emails/<%= email.id %>"><%= email.get('sender_address')%> | <%= (email.get('title') + " - " + email.get('content')).substring(0,60)  %>
+  | <%= currentDate %></a></li>
+
+<% }); %>

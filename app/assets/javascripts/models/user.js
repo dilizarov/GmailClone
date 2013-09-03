@@ -3,7 +3,7 @@ Gmail.Models.User = Backbone.Model.extend({
   urlRoot: '/users',
   
   parse: function(data) {
-    var emails_collection = Gmail.Collections.Emails();
+    var emails_collection = new Gmail.Collections.Emails();
     data.emails = emails_collection;
     return data;
   },

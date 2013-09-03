@@ -1,29 +1,37 @@
 Gmail.Routers.GmailRouter = Backbone.Router.extend({
   
-  initialize: function($rootEl, emailData) {
+  initialize: function($rootEl, $subEl, folderData) {
     this.$rootEl = $rootEl;
-    this.emailData = emailData;
-    this.emailData.each ( function (email) {
-      
-    })
+    this.$subEl = $subEl;
+    this.folderData = folderData;
   },
   
   routes: {
-    "" : "index",
-    "emails/:id" : "show"
+    "" : "inbox",
+    "emails/:id" : "showEmail"
   },
   
-  index: function() { 
+  inbox: function() { 
   
     var that = this;
-    var gmailIndexView = new Gmail.Views.GmailIndexView({
-      collection: that.emailData
-    });
+
+    inboxFolder = this.folderData.findWhere({name: "Inbox"})
+    inboxFolder.fetch({ success: function(folderData) {
+      var emails = folderData.get('emails');
+      var gmailInboxView = new Gmail.Views.GmailInboxView({
+        collection: emails
+      });
+      
+      that.$rootEl.html(gmailInboxView.render().$el);
+    }, 
+    error: function(folderData) {
+      debugger
+      console.log(folderData);
+    }})
   
-    that.$rootEl.html(gmailIndexView.render().$el);
-  },
+    },
   
-  show: function(id) {
+  showEmail: function(id) {
     
     var that = this;
     var email = this.emailData.get(id);

@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Folder.create(name: "Inbox")
+Folder.create(name: "Starred")
+Folder.create(name: "Sent Mail")
+Folder.create(name: "Drafts")
+Folder.create(name: "Spam")
+Folder.create(name: "Trash")

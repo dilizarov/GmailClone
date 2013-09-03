@@ -2,6 +2,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password
   attr_reader :password
 
+  has_many :user_folders,
+  :class_name => "UserFolder"
+  
+  has_many :folders, :through => :user_folders, :source => :folder
+
   has_many :sent_emails,
   :class_name => "Email",
   :foreign_key => :sender_address,
