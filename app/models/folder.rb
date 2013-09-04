@@ -8,4 +8,23 @@ class Folder < ActiveRecord::Base
            :class_name => "UserFolder"
   has_many :users, :through => :user_folders, :source => :user 
 
+  def get_emails(user)
+    
+    folder_name = self.name
+    
+    case folder_name
+    when "Inbox"
+      emails = self.emails.select { |email| email.recipient_id == user.id }
+    when "Starred"
+      emails = self.emails.select { |email| email.recipient_id == user.id ||                                                email.sender_address == user.email }
+    when "Sent Mail"
+      emails = self.emails.select { |email| email.sender_address == user.email }
+    else
+      emails = "I DIDN'T IMPLEMENT THAT YET"
+    end 
+    
+    emails
+      
+  end
+
 end

@@ -7,11 +7,11 @@ class FoldersController < ApplicationController
   end
   
   def show
-    @folder = Folder.find(params[:id])
-    @emails = @folder.emails.select { |email| email.recipient_id == current_user.id }
-    p @emails
     
-    p "OMG"
+    p params[:id]
+    
+    @folder = Folder.find(params[:id])
+    @emails = @folder.get_emails(current_user)
     
     render 'show.rabl'
   end
