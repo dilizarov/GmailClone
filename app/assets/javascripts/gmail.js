@@ -5,10 +5,12 @@ window.Gmail = {
   Routers: {},
   initialize: function($rootEl, $subEl, currentUser) {
     Gmail.currentUser = currentUser;
-    var folders = new Gmail.Collections.Folders();
-    folders.fetch({
-      success: function(folderData) {
-        new Gmail.Routers.GmailRouter($rootEl, $subEl, folderData)
+    Gmail.folders = new Gmail.Collections.Folders();
+    Gmail.folders.fetch({
+      success: function() {
+        var inbox = Gmail.folders.get(1);
+        inbox.save(); // I'm unaware why I have to do this. Backbone appears to bug out on my inbox folder.
+        new Gmail.Routers.GmailRouter($rootEl, $subEl)
         Backbone.history.start();
       },
       error: function(folderData) {

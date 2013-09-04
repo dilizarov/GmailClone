@@ -24,6 +24,8 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
   },
   
   star: function() {
-    debugger
+    event.preventDefault();
+    
+    
   }
 })

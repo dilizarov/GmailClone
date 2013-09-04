@@ -1,12 +1,11 @@
 Gmail.Routers.GmailRouter = Backbone.Router.extend({
   
-  initialize: function($rootEl, $subEl, folderData) {
+  initialize: function($rootEl, $subEl) {
     this.$rootEl = $rootEl;
     this.$subEl = $subEl;
-    this.folderData = folderData;
     
     var gmailSidebarView = new Gmail.Views.GmailSidebarView({
-      collection: folderData
+      collection: Gmail.folders
     });
     
     this.$subEl.html(gmailSidebarView.render().$el);
@@ -18,50 +17,45 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
     "folders/:id" : "showFolder"
   },
   
-//   inbox: function() { 
-//   
-//     var that = this;
-//     //We always redirect to inbox as root. Hence, no way to avoid default folder becoming inbox folder
-//     this.folder = this.folderData.findWhere({ name: "Inbox" })
-//     this.folder.fetch({ success: function(folderData) {
-//       var emails = folderData.get('emails');
-//       var gmailFolderView = new Gmail.Views.GmailFolderView({
-//         collection: emails
-//       });
-//       
-//       that.$rootEl.html(gmailInboxView.render().$el);
-//     }
-//   })
-//   
-// },
   
-showEmail: function(id) {
+  showEmail: function(id) {
    
-  var that = this;
-  var email = this.folder.get('emails').get(id)
+    var that = this;
+    var email = this.folder.get('emails').get(id)
     
-  var gmailShowView = new Gmail.Views.GmailShowView({
-    model: email 
-  });
+    var gmailShowView = new Gmail.Views.GmailShowView({
+      model: email 
+    });
     
-  that.$rootEl.html(gmailShowView.render().$el);
-},
+    that.$rootEl.html(gmailShowView.render().$el);
+  },
   
-showFolder: function(id) {
-   
-  if (!id) {var id = 1};
-   
-  var that = this;
-  this.folder = this.folderData.get(id)
-  
-  this.folder.fetch({
-    success: function(folderData) {
-      var emails = folderData.get('emails');
+  showFolder: function(id) {
+    
+    var that = this;
+    
+    var showEmails = function () {
+      var emails = that.folder.get('emails');
       var gmailFolderView = new Gmail.Views.GmailFolderView({
         collection: emails
       });
+      
       that.$rootEl.html(gmailFolderView.render().$el);
+    };
+   
+    if (!id) {var id = 1};
+   
+    this.folder = Gmail.folders.get(id)
+  
+    if (this.folder.get('emails').length) {
+      showEmails();
+    } else {
+      this.folder.fetch({
+        success: function(folderData) {
+          showEmails();
+        }
+      });  
     }
-  });
-}
+  
+  }
 });

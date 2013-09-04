@@ -6,6 +6,13 @@ class FoldersController < ApplicationController
     render :json => @folders  
   end
   
+  def update
+    @folder = Folder.find(params[:id])
+    @folder.update_attributes(params[:folder])
+    
+    render :json => @folder
+  end
+  
   def show
     
     p params[:id]
