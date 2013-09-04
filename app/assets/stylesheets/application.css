@@ -22,3 +22,6 @@
 	float: right;
 	width: 75%;
 }
+
+table.emails { table-layout:fixed; }
+table.emails td { overflow: hidden; }

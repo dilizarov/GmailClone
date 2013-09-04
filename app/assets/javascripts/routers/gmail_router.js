@@ -18,22 +18,22 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
     "folders/:id" : "showFolder"
   },
   
-  inbox: function() { 
-  
-    var that = this;
-    //We always redirect to inbox as root. Hence, no way to avoid default folder becoming inbox folder
-    this.folder = this.folderData.findWhere({ name: "Inbox" })
-    this.folder.fetch({ success: function(folderData) {
-      var emails = folderData.get('emails');
-      var gmailFolderView = new Gmail.Views.GmailFolderView({
-        collection: emails
-      });
-      
-      that.$rootEl.html(gmailInboxView.render().$el);
-    }
-  })
-  
-},
+//   inbox: function() { 
+//   
+//     var that = this;
+//     //We always redirect to inbox as root. Hence, no way to avoid default folder becoming inbox folder
+//     this.folder = this.folderData.findWhere({ name: "Inbox" })
+//     this.folder.fetch({ success: function(folderData) {
+//       var emails = folderData.get('emails');
+//       var gmailFolderView = new Gmail.Views.GmailFolderView({
+//         collection: emails
+//       });
+//       
+//       that.$rootEl.html(gmailInboxView.render().$el);
+//     }
+//   })
+//   
+// },
   
 showEmail: function(id) {
    
@@ -41,7 +41,7 @@ showEmail: function(id) {
   var email = this.folder.get('emails').get(id)
     
   var gmailShowView = new Gmail.Views.GmailShowView({
-    model: email
+    model: email 
   });
     
   that.$rootEl.html(gmailShowView.render().$el);
@@ -52,9 +52,9 @@ showFolder: function(id) {
   if (!id) {var id = 1};
    
   var that = this;
-  var folder = this.folderData.get(id)
+  this.folder = this.folderData.get(id)
   
-  folder.fetch({
+  this.folder.fetch({
     success: function(folderData) {
       var emails = folderData.get('emails');
       var gmailFolderView = new Gmail.Views.GmailFolderView({

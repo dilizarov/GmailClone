@@ -1,5 +1,11 @@
 <h2>Emails</h2>
 
+<table cellpadding="0" class="emails">
+  <col width="25px" />
+  <col width="200px" />
+  <col width="402px" />
+  <col width="25px" />
+  <col width="85px" />
 <% emails.each(function (email) { %>
   <% currentDate = new Date(email.get('updated_at')) %>
   <% if (Date.sameDays(date, currentDate)) { %>
@@ -11,7 +17,21 @@
   <% } else { %>
   <%    currentDate = currentDate.getShortMonthName() + " " + currentDate.getDate(); %>
   <% } %>
-  <li class="email"><a href="#/emails/<%= email.id %>"><%= email.get('sender_address')%> | <%= (email.get('title') + " - " + email.get('content')).substring(0,60)  %>
-  | <%= currentDate %></a></li>
-
+    <tr class="email" id="<%= email.id %>">
+      <td>
+        <%= JST['gmail/checkbox']({ theEmail : email }) %>
+      </td>
+      <td>
+        <%= email.get('sender_address')%>
+      </td>
+      <td> 
+        <%= (email.get('title') + " - " + email.get('content')).substring(0,60)  %>
+      </td>
+      <td>
+      </td>
+      <td>
+        <%= currentDate %></a>
+      </td>
+    </tr>
 <% }); %>
+</table>
