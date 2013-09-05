@@ -26,6 +26,12 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
   star: function() {
     event.preventDefault();
     
+    var emailId = event.target.form.id;
+    var email = this.collection.get(emailId);
+    var toggle = !email.get('starred');
+    
+    email.set({starred: toggle})
+    email.save();
     
   }
 })

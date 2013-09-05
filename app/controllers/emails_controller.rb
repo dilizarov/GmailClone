@@ -16,6 +16,17 @@ class EmailsController < ApplicationController
   
   def update
     
+    @email = Email.find(params[:id])
+    starred_folder = Folder.find_by_name('Starred');
+    starred = FolderEmail.find_by_folder_id_and_email_id(starred_folder.id, @email.id)
+    if (params[:starred] && !starred)
+      FolderEmail.create(folder_id: starred_folder.id, email_id: @email.id)
+    elsif (!params[:starred] && starred)
+      starred.destroy
+    end
+    
+    render :json => @email
+    
   end
   
   def destroy
