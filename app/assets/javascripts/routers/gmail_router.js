@@ -34,28 +34,17 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
     
     var that = this;
     
-    var showEmails = function () {
-      var emails = that.folder.get('emails');
+    if (!id) id = 1;
+   
+    this.folder = Gmail.folders.get(id)
+  
+    this.folder.getEmails( function (emails) {
       var gmailFolderView = new Gmail.Views.GmailFolderView({
         collection: emails
       });
       
       that.$rootEl.html(gmailFolderView.render().$el);
-    };
-   
-    if (!id) {var id = 1};
-   
-    this.folder = Gmail.folders.get(id)
-  
-    if (this.folder.get('emails').length) {
-      showEmails();
-    } else {
-      this.folder.fetch({
-        success: function(folderData) {
-          showEmails();
-        }
-      });  
-    }
-  
+    });
+      
   }
 });
