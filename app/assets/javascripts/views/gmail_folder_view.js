@@ -2,7 +2,7 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
   
   events: {
     "click .email": "folderEmail",
-    "click .email [type = 'checkbox']": "star"
+    "click .star": "star"
   },
   
   render: function() {
@@ -23,15 +23,24 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
     Backbone.history.navigate("#/emails/" + id);
   },
   
-  star: function() {
-    event.preventDefault();
+  star: function(event) {
+    event.stopPropagation();
+         
+    var emailID = event.target.form.id;
+    var thisEmail = this.collection.get(emailID);
+    var toggle = !thisEmail.get('starred');
+    var starredFolder = Gmail.folders.find(
+      function(folder) { return folder.get('name') === "Starred"}
+    );
+      
+    thisEmail.set({starred: toggle}); 
+    thisEmail.save();
     
-    var emailId = event.target.form.id;
-    var email = this.collection.get(emailId);
-    var toggle = !email.get('starred');
+    debugger
     
-    email.set({starred: toggle})
-    email.save();
-    
+    Gmail.folderEmails.push({folder: starredFolder, email: thisEmail});
+    Gmail.folderEmails.sync('create', this, {success: function() {
+      console.log("Hell yeah!");
+    }});
   }
 })

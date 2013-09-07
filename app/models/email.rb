@@ -3,7 +3,7 @@ class Email < ActiveRecord::Base
                   :recipient_id, :sender_address, :starred, 
                   :title, :folder_id
   
-  default_scope order('updated_at DESC')
+  default_scope order('created_at DESC')
   
   belongs_to :sender,
   :class_name => "User",

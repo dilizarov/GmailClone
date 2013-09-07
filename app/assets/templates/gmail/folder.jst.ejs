@@ -7,7 +7,7 @@
   <col width="25px" />
   <col width="85px" />
 <% emails.each(function (email) { %>
-  <% currentDate = new Date(email.get('updated_at')) %>
+  <% currentDate = new Date(email.get('created_at')) %>
   <% if (Date.sameDays(date, currentDate)) { %>
   <%    timeStamp = (currentDate.getHours() > 11) ? " pm" : " am" %>
   <%    hour = (currentDate.getHours() === 0) ? 12 : (currentDate.getHours() % 12) %>
