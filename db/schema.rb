@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130903183329) do
+ActiveRecord::Schema.define(:version => 20130907222935) do
 
   create_table "emails", :force => true do |t|
     t.integer  "recipient_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130903183329) do
     t.integer  "email_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   add_index "folder_emails", ["email_id"], :name => "index_folder_emails_on_email_id"

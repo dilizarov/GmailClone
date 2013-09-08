@@ -1,4 +1,4 @@
 Gmail.Collections.FolderEmails = Backbone.Collection.extend({
-  url: '/folderemails',
+  url: '/folderjoins',
   model: Gmail.Models.FolderEmail
 })

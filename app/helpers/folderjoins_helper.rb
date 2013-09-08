@@ -1,0 +1,2 @@
+module FolderjoinsHelper
+end

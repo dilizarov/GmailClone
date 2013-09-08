@@ -39,8 +39,6 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
     debugger
     
     Gmail.folderEmails.push({folder: starredFolder, email: thisEmail});
-    Gmail.folderEmails.sync('create', this, {success: function() {
-      console.log("Hell yeah!");
-    }});
+    Gmail.folderEmails.last().save();
   }
 })

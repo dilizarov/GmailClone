@@ -15,8 +15,6 @@ class FoldersController < ApplicationController
   
   def show
     
-    p params[:id]
-    
     @folder = Folder.find(params[:id])
     @emails = @folder.get_emails(current_user)
     
