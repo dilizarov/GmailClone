@@ -23,6 +23,25 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
     var that = this;
     var email = this.folder.get('emails').get(id)
     
+    var unreadFolder = Gmail.folders.find( function (folder) {
+      return (folder.get('name') === "Unread");
+    })
+    
+    var folderEmail = Gmail.folderEmails.find(function (join) {   
+        return (join.get('folder_id') === unreadFolder.id &&
+        join.get('email_id') === email.id)
+    });
+
+    debugger
+
+    if (folderEmail) {
+      folderEmail.destroy({
+        success: function(data) {
+          Gmail.folderEmails.remove(folderEmail)
+        }
+      });
+    }
+        
     var gmailShowView = new Gmail.Views.GmailShowView({
       model: email 
     });
@@ -49,7 +68,9 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
       
       if (firstFetch) {
         Gmail.folders.get(2).getEmails(function (emails) {
-          that.$rootEl.html(gmailFolderView.render().$el)
+          Gmail.folders.get(7).getEmails(function (moreEmails) {
+            that.$rootEl.html(gmailFolderView.render().$el)
+          })
         });
       } else {
         that.$rootEl.html(gmailFolderView.render().$el);

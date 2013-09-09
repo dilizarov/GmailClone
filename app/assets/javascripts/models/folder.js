@@ -44,10 +44,7 @@ Gmail.Models.Folder = Backbone.Model.extend({
               return (thisEmail.id === join.get('email_id') && 
                       that.id === join.get('folder_id'))
           });
-          
-          // debugger
-          folderEmail.email = thisEmail;
-          
+          folderEmail.email = thisEmail;          
         })
         
         callback(that.get('emails'));

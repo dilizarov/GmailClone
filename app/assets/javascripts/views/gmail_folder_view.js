@@ -50,7 +50,6 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
       
       folderEmail.destroy();
       Gmail.folderEmails.remove(folderEmail);
-        
     }
     
   }

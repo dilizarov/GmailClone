@@ -16,7 +16,6 @@ Gmail.Views.GmailShowView = Backbone.View.extend({
   back: function() {
     
     event.preventDefault();
-    
     window.history.back();
   }
 })

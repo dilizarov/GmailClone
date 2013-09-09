@@ -9,16 +9,24 @@
 <% emails.each(function (email) { %>
   <% currentDate = new Date(email.get('created_at')) %>
   <% if (Date.sameDays(date, currentDate)) { %>
-  <%    timeStamp = (currentDate.getHours() > 11) ? " pm" : " am" %>
-  <%    hour = (currentDate.getHours() === 0) ? 12 : (currentDate.getHours() % 12) %>
-  <%    minutes = currentDate.getMinutes() %>  
+  <%    var timeStamp = (currentDate.getHours() > 11) ? " pm" : " am" %>
+  <%    var hour = (currentDate.getHours() === 0) ? 12 : (currentDate.getHours() % 12) %>
+  <%    var minutes = currentDate.getMinutes() %>  
   <%    minutes = (minutes === minutes % 10) ? "0" + (minutes) : minutes %>
   <%    currentDate = (hour) + ":" + minutes + timeStamp %>
   <% } else { %>
   <%    currentDate = currentDate.getShortMonthName() + " " + currentDate.getDate(); %>
   <% } %>
-      
-        <tr class="email" id="<%= email.id %>">
+  
+  <% var unread = Gmail.folderEmails.find( function (join) { %> 
+  <% return (join.get('email_id') === email.id && join.get('folder_id') === 7) %>
+  <% }) %>
+  
+        <% if (unread) { %>
+          <tr class="email unread" id="<%= email.id %>">
+        <% } else { %>
+          <tr class="email" id="<%= email.id %>">
+        <% } %>
           <td>
             <%= JST['gmail/checkbox']({ theEmail : email }) %>
           </td>
