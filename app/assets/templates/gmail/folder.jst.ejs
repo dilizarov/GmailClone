@@ -17,21 +17,23 @@
   <% } else { %>
   <%    currentDate = currentDate.getShortMonthName() + " " + currentDate.getDate(); %>
   <% } %>
-    <tr class="email" id="<%= email.id %>">
-      <td>
-        <%= JST['gmail/checkbox']({ theEmail : email }) %>
-      </td>
-      <td>
-        <%= email.get('sender_address')%>
-      </td>
-      <td> 
-        <%= (email.get('title') + " - " + email.get('content')).substring(0,60)  %>
-      </td>
-      <td>
-      </td>
-      <td>
-        <%= currentDate %></a>
-      </td>
-    </tr>
+      
+        <tr class="email" id="<%= email.id %>">
+          <td>
+            <%= JST['gmail/checkbox']({ theEmail : email }) %>
+          </td>
+          <td>
+            <%= email.get('sender_address')%>
+          </td>
+          <td> 
+            <%= (email.get('title') + " - " + email.get('content')).substring(0,60)  %>
+          </td>
+          <td>
+          </td>
+          <td>
+            <%= currentDate %></a>
+          </td>
+        </tr>
+      
 <% }); %>
 </table>

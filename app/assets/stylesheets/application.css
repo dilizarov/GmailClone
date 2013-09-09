@@ -25,3 +25,7 @@
 
 table.emails { table-layout:fixed; }
 table.emails td { overflow: hidden; }
+
+.unread {
+  font-weight: bold;
+}

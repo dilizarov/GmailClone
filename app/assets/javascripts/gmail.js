@@ -10,6 +10,7 @@ window.Gmail = {
       success: function() {
         var inbox = Gmail.folders.get(1);
         inbox.save(); // I'm unaware why I have to do this. Backbone appears to bug out on my inbox folder.
+        
         new Gmail.Routers.GmailRouter($rootEl, $subEl)
         Backbone.history.start();
       },

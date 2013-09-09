@@ -1,6 +1,6 @@
 class Email < ActiveRecord::Base
   attr_accessible :content, :parent_email_id, :read,
-                  :recipient_id, :sender_address, :starred, 
+                  :recipient_id, :sender_address, 
                   :title, :folder_id
   
   default_scope order('created_at DESC')

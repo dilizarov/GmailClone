@@ -43,8 +43,6 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
   
     this.folder.getEmails( function (emails) {
       
-      // debugger
-      
       var gmailFolderView = new Gmail.Views.GmailFolderView({
         collection: emails, folder: that.folder
       });
