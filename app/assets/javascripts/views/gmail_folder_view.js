@@ -1,5 +1,9 @@
 Gmail.Views.GmailFolderView = Backbone.View.extend({
   
+  // initialize: function() {
+  //   this.listenTo(Gmail.folderEmails, "change", this.render);
+  // }
+  
   events: {
     "click .email": "folderEmail",
     "click .star": "star"
@@ -25,20 +29,30 @@ Gmail.Views.GmailFolderView = Backbone.View.extend({
   
   star: function(event) {
     event.stopPropagation();
-         
+    
     var emailID = event.target.form.id;
     var thisEmail = this.collection.get(emailID);
-    var toggle = !thisEmail.get('starred');
     var starredFolder = Gmail.folders.find(
       function(folder) { return folder.get('name') === "Starred"}
     );
+    
+    if($(event.target).prop('checked')) {
+      Gmail.folderEmails.push({folder_id: starredFolder.id, 
+                               email_id: thisEmail.id});
+     var latestJoin = Gmail.folderEmails.last();
+     latestJoin.email = thisEmail;
+     latestJoin.save();
+    } else {
+      var folderEmail = Gmail.folderEmails.find(function (join) {   
+          return (join.get('folder_id') === starredFolder.id &&
+          join.get('email_id') === thisEmail.id)
+      });
       
-    thisEmail.set({starred: toggle}); 
-    thisEmail.save();
+      folderEmail.destroy();
+      Gmail.folderEmails.remove(folderEmail);
+        
+    }
     
-    debugger
-    
-    Gmail.folderEmails.push({folder: starredFolder, email: thisEmail});
-    Gmail.folderEmails.last().save();
   }
+ 
 })

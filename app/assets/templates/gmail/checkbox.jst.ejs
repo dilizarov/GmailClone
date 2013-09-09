@@ -1,6 +1,10 @@
 <form class= "star" id=<%= theEmail.id %> >
   
-  <% if (theEmail.get('starred')) { %>
+  <% var starredEmail = Gmail.folderEmails.find( function(join) { %>
+  <%  return (join.get('folder_id') === 2 && join.get('email_id') === theEmail.id) %>
+  <% }) %>
+  
+  <% if (starredEmail) { %>
     <input type="checkbox" checked>
   <% } else { %>
     <input type="checkbox">

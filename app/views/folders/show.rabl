@@ -6,3 +6,7 @@ child(@emails) do
              :recipient_id, :sender_address, :starred,
              :title, :created_at, :updated_at
 end
+
+child(@folder_emails) do
+  attributes :folder_id, :email_id, :id
+end
