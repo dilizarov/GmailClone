@@ -1,9 +1,21 @@
-<h1>Create User</h1>
+<nav class="navbar navbar-default navbar-fixed-top"
+     style="height: 75px;background-color: rgb(241,241,241)">
+<form class= "topbar" action="<%= new_session_url %>" method="get">
+Have an account? &nbsp; <input type="submit" 
+                            value="SIGN IN" 
+                            class="btn btn-danger btn-sm"
+                            style="font-weight : bold">
+</form>
+</nav>
+
+<div class="signin-box <%= "has-error" if flash.now[:errors] %>">
+<h4>Create User</h4>
 
 <% if flash.now[:errors] %>
   <% flash.now[:errors].each do |error| %>
     <%= error %><br>
   <% end %>
 <% end %>
-<br>
+
 <%= render "form", :user => @user %>
+</div>

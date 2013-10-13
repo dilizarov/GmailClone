@@ -1,33 +1,50 @@
-new to Gmail? <%= button_to "Create an account", new_user_url, { :method => :get } %>
-
-<br><br><h1>Sign In</h1>
-
-<% if flash.now[:errors] %>
-  <% flash.now[:errors].each do |error| %>
-    <%= error %>
-  <% end %>
-<% end %>
-
-<form action="<%= session_url %>" method="post">
-  <input
-     name="authenticity_token"
-     type="hidden"
-     value="<%= form_authenticity_token %>">
-
-  <label for="user_username">Email</label>
-  <input
-     id="user_email"
-     name="user[email]"
-     type="text"
-     value="<%= @user.email %>">
-  <br>
-
-  <label for="user_password">Password</label>
-  <input
-     id="user_password"
-     name="user[password]"
-     type="password">
-  <br>
-
-  <input type="submit" value="Log in">
+<nav class="navbar navbar-default navbar-fixed-top"
+     style="height: 75px;background-color: rgb(241,241,241)">
+<form class= "topbar" action="<%= new_user_url %>" method="get">
+New to Gmail? &nbsp; <input type="submit" 
+                            value="CREATE AN ACCOUNT" 
+                            class="btn btn-danger btn-sm"
+                            style="font-weight : bold">
 </form>
+</nav>
+
+
+<div class="signin-box <%= "has-error" if flash.now[:errors] %>" >
+  <h4>Sign in</h4>
+
+  <% if flash.now[:errors] %>
+    <% flash.now[:errors].each do |error| %>
+      <%= error %>
+    <% end %>
+  <% end %>
+  <form role="form" action="<%= session_url %>" method="post">
+    <input
+       name="authenticity_token"
+       type="hidden"
+       value="<%= form_authenticity_token %>">
+    <label for="user_email">Username</label>
+    <div class="form-inline">
+      <input
+         class="form-control"
+         style="width: 280px"
+         id="user_email"
+         name="user[email]"
+         type="text"
+         value="<%= @user.email %>">
+    </div>
+    <br>
+    
+    <label for="user_password">Password</label>
+    <div class="form-inline">
+      <input
+         class="form-control"
+         style="width: 280px"
+         id="user_password"
+         name="user[password]"
+         type="password">
+   </div>
+    <br>
+
+    <input type="submit" value="Sign in" class="btn btn-primary">
+  </form>
+</div>

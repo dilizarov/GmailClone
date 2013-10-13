@@ -9,10 +9,18 @@
 <body>
 
 <% if !current_user.nil? %>
-  <ul>
-    <li>Logged in as: <%= current_user.email %></li>
-    <li><%= button_to "Logout", session_url, :method => :delete %></li>
-  </ul>
+
+  <nav class="navbar navbar-default navbar-fixed-top"
+       style="height: 75px;background-color: rgb(241,241,241);">
+  <a class="navbar-brand" style="margin-top: 10px; font-size: 200%" href="#">Gmaily</a>
+  <form class= "topbar" action="<%= session_url %>" method="post">
+    <input name="_method" type="hidden" value="delete">  
+    <%= current_user.email %> &nbsp; <input type="submit" 
+                                value="Sign out" 
+                                class="btn btn-default btn-sm"
+                                style="font-weight : bold">
+  </form>
+  </nav>
 <% end %>
 
 <%= yield %>

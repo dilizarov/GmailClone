@@ -2,7 +2,7 @@
 <% method = (user.persisted? ? "put" : "post") %>
 <% message = (user.persisted? ? "Update user" : "Create user") %>
 
-<form action="<%= action %>" method="post">
+<form style="margin-left: 10px" role="form" action="<%= action %>" method="post">
   <input
      name="_method"
      type="hidden"
@@ -12,20 +12,26 @@
      type="hidden"
      value="<%= form_authenticity_token %>">
 
-  <label for="user_email">Email</label>
+  <div class="form-inline">
   <input
+     class="form-control"
+     style="width: 150px"
      id="user_email"
      name="user[email]"
      type="text"
-     value="<%= user.email[0..-12] %>">@gmaily.com
+     value="<%= user.email[0..-12] %>"
+     placeholder="username">@gmaily.com
+  </div>
   <br>
-
-  <label for="user_password">Password</label>
+  <div class="form-inline">
   <input
+     class="form-control"
+     style="width: 150px"
      id="user_password"
      name="user[password]"
-     type="password">
+     type="password"
+     placeholder="password">
+  </div>
   <br>
-
-  <input type="submit" value="<%= message %>">
+  <input type="submit" class="btn btn-primary" value="<%= message %>">
 </form>
