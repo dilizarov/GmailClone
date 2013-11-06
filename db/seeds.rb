@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+folder_names = ['Inbox', 'Starred', 'Sent Mail', 'Drafts', 'Spam', 'Trash']
+folder_names.length.times do |i|
+  Folder.create(name: folder_names[i])
+end
