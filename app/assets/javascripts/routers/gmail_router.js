@@ -32,8 +32,6 @@ Gmail.Routers.GmailRouter = Backbone.Router.extend({
         join.get('email_id') === email.id)
     });
 
-    debugger
-
     if (folderEmail) {
       folderEmail.destroy({
         success: function(data) {
