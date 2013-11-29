@@ -15,6 +15,7 @@ end
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'jquery-rails'
 gem 'pg'
+gem 'newrelic_rpm'
 
 group :development do
   gem "better_errors"
