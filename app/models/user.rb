@@ -37,11 +37,12 @@ class User < ActiveRecord::Base
   end
 
   def self.generate_session_token
-    loop do 
+    loop do
       session_token = SecureRandom::urlsafe_base64(16)
       unless User.find_by_session_token(session_token)
         return session_token
       end
+    end
   end
 
   def is_password?(password)
