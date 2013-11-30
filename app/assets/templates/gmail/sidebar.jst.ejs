@@ -1,3 +1,30 @@
+<button class="btn btn-default" data-toggle="modal" data-target="#myModal">
+  Compose
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">New Message</h4>
+      </div>
+      <form class="sendEmail">
+      <div class="modal-body">
+        <input type="text" class="recips" name="email[recipients]" data-role="tagsinput" placeholder="Recipients"/><br>
+        <input type="text" class="form-control" name="email[subject]" placeholder="Subject"/><br>
+        <textarea class="form-control" rows="8" name="email[content]" style="resize:vertical;"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary sent" data-dismiss="modal">Send</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script> $('.recips').tagsinput();</script>
+
 <% _.each (folders, function(folder) { %>
   <li><a href="#/folders/<%= folder.id %>"><%= folder.get('name') %></a></li>
 <% }); %>

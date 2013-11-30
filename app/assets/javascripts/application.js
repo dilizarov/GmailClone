@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.serializeJSON
 //= require bootstrap
+//= require bootstrap-tagsinput.min
 //= require underscore
 //= require backbone
 //= require gmail

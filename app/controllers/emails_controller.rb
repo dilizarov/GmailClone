@@ -6,12 +6,11 @@ class EmailsController < ApplicationController
     render :json => @emails
   end
   
-  def create
-    
-  end
-  
-  def show
-    
+  def send
+    email = params['email']
+     Mailer.email(email['recipients'], current_user.email, email['subject'], email['content']).deliver!
+     
+     render :json => email
   end
   
   def update
@@ -22,11 +21,9 @@ class EmailsController < ApplicationController
     starred = FolderEmail.find_by_folder_id_and_email_id(starred_folder.id, @email.id)
     
     if (params[:starred] && starred.nil?)
-      p "HOWDY, I'M DAVID!"
       FolderEmail.create(folder_id: starred_folder.id, email_id: @email.id)
       @email.update_attributes(starred: true)
     elsif (params[:starred] == false && starred)
-      p "ASTA LA BYEBYE"
       starred.destroy
       @email.update_attributes(starred: false)
     end
@@ -35,16 +32,4 @@ class EmailsController < ApplicationController
     
   end
   
-  def destroy
-    
-  end
-  
-  def new
-    
-  end
-  
-  def edit
-    
-  end
-
 end
