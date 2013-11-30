@@ -6,9 +6,11 @@ class EmailsController < ApplicationController
     render :json => @emails
   end
   
-  def send
+  def create
+    p "AND I DO BELIEVE"
+    
     email = params['email']
-     Mailer.email(email['recipients'], current_user.email, email['subject'], email['content']).deliver!
+    Mailer.email(email['recipients'], current_user.email, email['subject'], email['content']).deliver
      
      render :json => email
   end

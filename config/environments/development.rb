@@ -16,14 +16,15 @@ Gmail::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
     :address => "smtp.mailgun.org",
     :port => 587,
     :domain => "app17850547.mailgun.org",
     :user_name => "postmaster@app17850547.mailgun.org",
-    :password => "MYPASSWORD"
+    :password => "6vu707kvcco4"
   }
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

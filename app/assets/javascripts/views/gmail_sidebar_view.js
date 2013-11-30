@@ -17,12 +17,13 @@ Gmail.Views.GmailSidebarView = Backbone.View.extend({
   },
   
   send: function() {
-    var data = $('.sendEmail').serializeJSON();
+    var myData = $('.sendEmail').serializeJSON();
     
     $.ajax({
-      url: '/emails/send',
+      url: '/emails',
       type: 'POST',
-      data: data,
+      data: myData,
+      dataType: "json",
       success: function(res) {
         console.log("oh yes!");
       },
@@ -30,6 +31,8 @@ Gmail.Views.GmailSidebarView = Backbone.View.extend({
         console.log(what);
       }
     });
+    
+    return;
   }
   
 })
